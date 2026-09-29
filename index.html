@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expense Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+  <header class="top">
+    <h1>Expense Tracker</h1>
+    <p class="sub">Keep track of what comes in and what goes out.</p>
+  </header>
+
+  <section class="summary" aria-label="Summary">
+    <div class="stat balance"><span>Balance</span><strong id="balance">0.00</strong></div>
+    <div class="stat income"><span>Income</span><strong id="totalIncome">0.00</strong></div>
+    <div class="stat expense"><span>Expenses</span><strong id="totalExpense">0.00</strong></div>
+  </section>
+
+  <div class="layout">
+    <section class="panel">
+      <h2 id="formTitle">Add transaction</h2>
+      <form id="form" novalidate>
+        <input type="hidden" id="editId">
+        <div class="type-toggle" role="radiogroup" aria-label="Type">
+          <label><input type="radio" name="type" value="expense" checked><span>Expense</span></label>
+          <label><input type="radio" name="type" value="income"><span>Income</span></label>
+        </div>
+
+        <label for="amount">Amount</label>
+        <input id="amount" type="number" step="0.01" min="0" inputmode="decimal" placeholder="0.00">
+        <small class="err" id="amountErr"></small>
+
+        <label for="category">Category</label>
+        <select id="category"></select>
+        <small class="err" id="categoryErr"></small>
+
+        <label for="date">Date</label>
+        <input id="date" type="date">
+        <small class="err" id="dateErr"></small>
+
+        <label for="description">Description</label>
+        <input id="description" type="text" maxlength="80" placeholder="e.g. Lunch with team">
+        <small class="err" id="descriptionErr"></small>
+
+        <div class="actions">
+          <button type="submit" class="btn primary" id="submitBtn">Add transaction</button>
+          <button type="button" class="btn" id="cancelBtn" hidden>Cancel edit</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="filters">
+        <div>
+          <label for="filterType">Type</label>
+          <select id="filterType">
+            <option value="all">All</option>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+        </div>
+        <div>
+          <label for="filterCategory">Category</label>
+          <select id="filterCategory"></select>
+        </div>
+        <div>
+          <label for="filterMonth">Month</label>
+          <input type="month" id="filterMonth">
+        </div>
+      </div>
+
+      <h2>Transactions</h2>
+      <ul id="list" class="list"></ul>
+      <p id="empty" class="empty" hidden>No transactions found. Add one to get started.</p>
+    </section>
+  </div>
+
+  <section class="panel insights">
+    <h2>Expenses by category</h2>
+    <p class="note" id="chartNote"></p>
+    <div id="chart" class="chart"></div>
+  </section>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
